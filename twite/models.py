@@ -6,8 +6,8 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Profile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    avatar = models.ImageField('avatar/')
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    avatar = models.ImageField(upload_to='avatar/')
     followers = models.ManyToManyField('self')
     following = models.ManyToManyField('self')
 
@@ -15,7 +15,7 @@ class Profile(models.Model):
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.CharField(max_length=1000)
-    file = models.FileField('Fichier/')
+    file = models.FileField(upload_to='fichier/')
     date = models.DateTimeField(auto_now_add=datetime.datetime.now())
 
 
